@@ -2,14 +2,14 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const NotFound = () => {
+const index = () => {
   return (
     <SafeAreaView>
-      <Text>Page Not Found</Text>
+      <Text>index</Text>
     </SafeAreaView>
   );
 };
 
-export default NotFound;
+export default index;
 
 const styles = StyleSheet.create({});
