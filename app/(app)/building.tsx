@@ -24,7 +24,7 @@ const building = () => {
       setBuildings(project?.buildings);
       console.log("buildings", buildings);
       return project?.buildings;
-    }, 2500);
+    }, 500);
   }, []);
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -47,12 +47,28 @@ const building = () => {
             onPress={() =>
               router.push({
                 pathname: "/(app)/inspection",
-                params: { buildingId: building?.id, projectID: datas },
+                params: { buildingId: building?.id, projectId: datas },
               })
             }
           >
             <Text style={styles.buildingName}>{building?.name}</Text>
-            <Text style={styles.buildingAddress}>{building?.address}</Text>
+            <View style={styles.horizontal}>
+              <View style={styles.item}>
+                <Text style={styles.text}>Number of Inspections</Text>
+                <Text style={styles.textBold}>
+                  {building?.inspections.length}
+                </Text>
+              </View>
+              <View style={styles.item}>
+                <Text style={styles.text}>Number of Damages</Text>
+                <Text style={styles.textBold}>
+                  {building?.inspections?.reduce(
+                    (acc, inspection) => acc + inspection?.damages.length,
+                    0
+                  )}
+                </Text>
+              </View>
+            </View>
           </Pressable>
         ))}
       </View>
@@ -94,5 +110,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: FONTS.regular,
     color: COLORS.secondary,
+  },
+  item: {
+    marginVertical: 10,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: COLORS.lightGray,
+    padding: 5,
+  },
+  text: {
+    fontSize: 12,
+    fontFamily: FONTS.medium,
+    color: COLORS.secondary,
+  },
+  textBold: {
+    fontSize: 16,
+    fontFamily: FONTS.semiBold,
   },
 });
